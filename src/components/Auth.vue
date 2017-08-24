@@ -1,11 +1,11 @@
 <template>
-  <div class="">
+  <div>
 
     <!--<div class="column box is-10-mobile is-offset-1-mobile is-half-tablet is-offset-one-quarter-tablet is-one-third-desktop is-offset-one-third-desktop">-->
     <div class="box">
 
       <img class="has-text-centered" src="../../src/assets/logo.png">
-
+      <form @submit.prevent.stop="login">
       <div class="field">
         <p class="control has-icons-left has-icons-right">
           <input v-model.lazy="email" class="input" type="email" placeholder="Email">
@@ -33,7 +33,7 @@
       <p class="control login">
         <button class="button is-primary is-outlined is-large is-fullwidth">Login</button>
       </p>
-
+      </form>
       <div class="section forgot-password">
         <p class="has-text-centered">
           <a href="#">Forgot password</a>
@@ -43,7 +43,16 @@
       </div>
 
     </div>
-
+    <div class="modal" :class="{ 'is-active': modalActive}">
+      <div @click="modalActive = false" class="modal-background"></div>
+      <div class="modal-content">
+        <!-- Any other Bulma elements you want -->
+        <div class="box">
+          <p>Thanks {{ email }} !</p>
+        </div>
+      </div>
+      <button @click="modalActive = false" class="modal-close is-large" aria-label="close"></button>
+    </div>
   </div>
 </template>
 
@@ -52,7 +61,15 @@
     data() {
       return {
         email: '',
-        password: ''
+        password: '',
+        modalActive: false
+      }
+    },
+    methods: {
+      login() {
+        // show modal
+        if ( !this.email && !this.password ) { return false }
+        this.modalActive = true;
       }
     }
   }
