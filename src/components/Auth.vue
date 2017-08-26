@@ -83,6 +83,7 @@
     padding-right: 3em;
     width: 25em;
     margin: 0 auto;
+    text-align: center;
   }
 
   @media (max-width: 450px) {
